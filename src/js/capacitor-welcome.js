@@ -1,5 +1,6 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Camera } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -61,28 +62,10 @@ window.customElements.define(
       </capacitor-welcome-titlebar>
       <main>
         <p>
-          Capacitor makes it easy to build powerful apps for the app stores, mobile web (Progressive Web Apps), and desktop, all
-          with a single code base.
-        </p>
-        <h2>Getting Started</h2>
-        <p>
-          You'll probably need a UI framework to build a full-featured app. Might we recommend
-          <a target="_blank" href="http://ionicframework.com/">Ionic</a>?
+          This demo shows how CapacitorHttp is sending out malformed multipart/form-data requests.
         </p>
         <p>
-          Visit <a href="https://capacitorjs.com">capacitorjs.com</a> for information
-          on using native features, building plugins, and more.
-        </p>
-        <a href="https://capacitorjs.com" target="_blank" class="button">Read more</a>
-        <h2>Tiny Demo</h2>
-        <p>
-          This demo shows how to call Capacitor plugins. Say cheese!
-        </p>
-        <p>
-          <button class="button" id="take-photo">Take Photo</button>
-        </p>
-        <p>
-          <img id="image" style="max-width: 100%">
+          <button class="button" id="makeRequest">Make request</button>
         </p>
       </main>
     </div>
@@ -92,20 +75,23 @@ window.customElements.define(
     connectedCallback() {
       const self = this;
 
-      self.shadowRoot.querySelector('#take-photo').addEventListener('click', async function (e) {
+      self.shadowRoot.querySelector('#makeRequest').addEventListener('click', async function (e) {
+        const url = 'https://webhook.site/7a17d752-1c9f-4c8d-9f2f-f3d9a717e2e3';
+        const formData = new FormData();
+
+        formData.append('key1', 'value1');
+        formData.append('key2', 'value2');
+
         try {
-          const photo = await Camera.getPhoto({
-            resultType: 'uri',
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData
           });
 
-          const image = self.shadowRoot.querySelector('#image');
-          if (!image) {
-            return;
-          }
-
-          image.src = photo.webPath;
-        } catch (e) {
-          console.warn('User cancelled', e);
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error('Error:', error);
         }
       });
     }
