@@ -1,6 +1,4 @@
 import { SplashScreen } from '@capacitor/splash-screen';
-import { Camera } from '@capacitor/camera';
-import { Capacitor } from '@capacitor/core';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -76,20 +74,18 @@ window.customElements.define(
       const self = this;
 
       self.shadowRoot.querySelector('#makeRequest').addEventListener('click', async function (e) {
+         // use whatever url you like, it's only about the request
         const url = 'https://webhook.site/7a17d752-1c9f-4c8d-9f2f-f3d9a717e2e3';
-        const formData = new FormData();
 
+        const formData = new FormData();
         formData.append('key1', 'value1');
         formData.append('key2', 'value2');
 
         try {
-          const response = await fetch(url, {
+          await fetch(url, {
             method: 'POST',
             body: formData
           });
-
-          const data = await response.json();
-          console.log(data);
         } catch (error) {
           console.error('Error:', error);
         }
