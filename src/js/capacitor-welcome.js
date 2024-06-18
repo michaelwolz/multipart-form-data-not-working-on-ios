@@ -74,17 +74,19 @@ window.customElements.define(
       const self = this;
 
       self.shadowRoot.querySelector('#makeRequest').addEventListener('click', async function (e) {
-         // use whatever url you like, it's only about the request
-        const url = 'https://webhook.site/7a17d752-1c9f-4c8d-9f2f-f3d9a717e2e3';
+        // use whatever url you like, it's only about the request
+        const url = 'https://webhook.site/6c0c0db8-91f9-4744-a960-359e68243d87';
 
         const formData = new FormData();
-        formData.append('key1', 'value1');
-        formData.append('key2', 'value2');
+        formData.append('key', 'value');
 
         try {
           await fetch(url, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: {
+              'Content-Type': 'multipart/form-data; boundary="MySuperCoolBoundary"; charset=UTF-8'
+            }
           });
         } catch (error) {
           console.error('Error:', error);
