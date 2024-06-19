@@ -75,7 +75,7 @@ window.customElements.define(
 
       self.shadowRoot.querySelector('#makeRequest').addEventListener('click', async function (e) {
         // use whatever url you like, it's only about the request
-        const url = 'https://webhook.site/6c0c0db8-91f9-4744-a960-359e68243d87';
+        const url = 'https://webhook.site/b428f97a-b62a-434c-bebe-87cb2a99ec0a';
 
         const formData = new FormData();
         formData.append('key', 'value');
