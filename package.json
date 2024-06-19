@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "file:../capacitor/android",
     "@capacitor/core": "^6.1.0",
     "@capacitor/ios": "file:../capacitor/ios",
     "@capacitor/splash-screen": "^6.0.1"
